@@ -25,6 +25,13 @@ dependencies:
     sdk: flutter
   json_annotation: ^3.0.0
   http:
+  provider:
+  firebase_core: ^0.4.4       # This dependency was added during initial configuration.
+  firebase_analytics: ^1.0.4  # add dependency for Google Analytics for Firebase
+  firebase_messaging: 5.1.5 # 2. https://pub.dev/packages/firebase_messaging
+  shared_preferences:
+  webview_flutter:  # 3. https://github.com/flutter/plugins/blob/master/packages/webview_flutter/example/ios/Runner/Info.plist
+
 
 dev_dependencies:
   flutter_test:
