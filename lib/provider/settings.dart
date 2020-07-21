@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class Settings with ChangeNotifier {
   String fcmtok;
+  bool install;
   SharedPreferences _prefs;
 
   Future<void> setFcm(String token) async {
@@ -18,6 +19,7 @@ class Settings with ChangeNotifier {
     print('init persistent memory start');
     this._prefs = await SharedPreferences.getInstance();
     this.fcmtok = this._prefs.getString(FCM_TOKEN) ?? '';
+    this.install = this._prefs.getBool(INSTALL) ?? false;
     print('init persistent memory end');
   }
 }

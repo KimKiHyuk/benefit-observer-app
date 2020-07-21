@@ -8,10 +8,26 @@ part of 'subscribe.dart';
 
 Subscribe _$SubscribeFromJson(Map<String, dynamic> json) {
   return Subscribe(
-    title: json['title'] as String,
+    topic: json['topic'] as String,
   );
 }
 
 Map<String, dynamic> _$SubscribeToJson(Subscribe instance) => <String, dynamic>{
-      'title': instance.title,
+      'topic': instance.topic,
+    };
+
+PostSubscribes _$PostSubscribesFromJson(Map<String, dynamic> json) {
+  return PostSubscribes(
+    subscribe: (json['subscribe'] as List)
+        ?.map((e) =>
+            e == null ? null : Subscribe.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    token: json['token'] as String,
+  );
+}
+
+Map<String, dynamic> _$PostSubscribesToJson(PostSubscribes instance) =>
+    <String, dynamic>{
+      'subscribe': instance.subscribe,
+      'token': instance.token,
     };

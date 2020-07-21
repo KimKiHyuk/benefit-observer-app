@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:benefit_app/network/api.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:benefit_app/provider/settings.dart';
@@ -54,7 +55,8 @@ class _WelcomeView extends State<WelcomeView> {
       return false;
     }
 
-    await Future.delayed(const Duration(seconds: 3), () {});
+    await Future.delayed(const Duration(seconds: 1), () {});
+    await API.registerFCMToken(settings.fcmtok); // login
 
     return true;
   }

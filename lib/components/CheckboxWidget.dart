@@ -1,7 +1,8 @@
+import 'package:benefit_app/network/api.dart';
 import 'package:flutter/material.dart';
 
 class CheckboxWidget extends StatefulWidget {
-  List<Map<dynamic, dynamic>> list;
+  List<Map<String, dynamic>> list;
   int index;
 
   CheckboxWidget({this.list, this.index});
@@ -18,7 +19,7 @@ class _CheckboxWidget extends State<CheckboxWidget> {
     return Card(
       child: Container(
           child: CheckboxListTile(
-        title: Text(this.widget.list[this.widget.index]['title']),
+        title: Text(this.widget.list[this.widget.index]['topic']),
         controlAffinity: ListTileControlAffinity.leading,
         onChanged: (bool val) {
           itemChange(val);
