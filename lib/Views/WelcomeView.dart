@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:benefit_app/main.dart';
 import 'package:benefit_app/network/api.dart';
+import 'package:benefit_app/services/AuthService.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:benefit_app/provider/settings.dart';
@@ -56,8 +58,16 @@ class _WelcomeView extends State<WelcomeView> {
     }
 
     await Future.delayed(const Duration(seconds: 1), () {});
-    await API.registerFCMToken(settings.fcmtok); // login
 
+    print("initalize token");
+    var res = await getIt<APIService>().registerFCMToken(settings.fcmtok); // login
+    if (res.statusCode != 201) {
+      return false;
+    }
+
+    print("initalize local token");
+    getIt<AuthService>().setLocalFcmToken(settings.fcmtok);
+    print(settings.fcmtok);
     return true;
   }
 
@@ -65,8 +75,11 @@ class _WelcomeView extends State<WelcomeView> {
     print('init firebase start');
     if (Platform.isIOS) iOS_Permission();
 
-    final token = await _firebaseMessaging.getToken();
-    settings.setFcm(token);
+    if (settings.fcmtok.isEmpty) {
+      final token = await _firebaseMessaging.getToken();
+      settings.setFcm(token);
+    }
+
 
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {

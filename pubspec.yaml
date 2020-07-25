@@ -25,6 +25,7 @@ dependencies:
     sdk: flutter
   json_annotation: ^3.0.0
   http:
+  get_it: ^4.0.2
   provider:
   firebase_core: ^0.4.4       # This dependency was added during initial configuration.
   firebase_analytics: ^1.0.4  # add dependency for Google Analytics for Firebase
